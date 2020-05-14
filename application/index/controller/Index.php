@@ -28,13 +28,12 @@ class Index
     	$encryptedData = input('post.encryptedData');
         $code          = input('post.code');
         $iv            = input('post.iv');
-        print_r($iv);die;
         $appid     = 'wx731ab9f741a5a603';
         $appsecret = '92eb447789ec2c9fbeb3db6b2ecaf2ed';
         // step1
         // 通过 code 用 curl 向腾讯服务器发送请求获取 session_key
         $session_key = $this->sendCode($appid, $appsecret, $code);
-
+        print_r($session_key);die;
         // step2
         // 用过 session_key 用 sdk 获得用户信息
         $save = [];
