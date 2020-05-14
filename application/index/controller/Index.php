@@ -38,7 +38,6 @@ class Index
         // step2
         // 用过 session_key 用 sdk 获得用户信息
         $save = [];
-
         // 相关参数为空判断
         if (empty($session_key) || empty($encryptedData) || empty($iv)) {
             $msg = "信息不全";
@@ -47,7 +46,7 @@ class Index
 
         //进行解密
         $userinfo = $this->getUserInfo($encryptedData, $iv, $session_key, $appid);
-
+        print_r($userinfo);die;
         // 解密成功判断
         if (isset($userinfo['code']) && 10001 == $userinfo['code']) {
             $msg = "请重试"; // 用户不应看到程序细节
