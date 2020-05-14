@@ -28,7 +28,7 @@ class Index
     	$encryptedData = input('post.encryptedData');
         $code          = input('post.code');
         $iv            = input('post.iv');
-
+        print_r($iv);die;
         $appid     = 'wx731ab9f741a5a603';
         $appsecret = '92eb447789ec2c9fbeb3db6b2ecaf2ed';
         // step1
@@ -46,7 +46,7 @@ class Index
 
         //进行解密
         $userinfo = $this->getUserInfo($encryptedData, $iv, $session_key, $appid);
-        print_r($userinfo);die;
+        
         // 解密成功判断
         if (isset($userinfo['code']) && 10001 == $userinfo['code']) {
             $msg = "请重试"; // 用户不应看到程序细节
