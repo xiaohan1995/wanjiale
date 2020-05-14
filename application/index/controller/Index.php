@@ -101,7 +101,6 @@ class Index
     {
         //进行解密
         $pc         = new WXBizDataCrypt($APPID, $session_key);
-        print_r($pc);die;
         $decodeData = "";
         $errCode    = $pc->decryptData($encryptedData, $iv, $decodeData);
         //判断解密是否成功
