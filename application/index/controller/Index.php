@@ -2,9 +2,10 @@
 namespace app\index\controller;
 use think\Db;
 use wxBizDataCrypt;
+use think\Controller;
 
 
-class Index
+class Index extends Controller
 {   
 	
     public function index()
@@ -57,13 +58,26 @@ class Index
         $save['unex']      = &$userinfo['gender'];
         $save['address']   = &$userinfo['city'];
         $save['avatarUrl'] = &$userinfo['avatarUrl'];
-        $save['time']      = time();
+        $save['last_login_time']      = time();
         $map['openid']     = &$userinfo['openId'];
 
         $msg = "获取成功";
-
+        $open_id = Db::table('user')->where('openid,'.'"'$save['openid'].'"')->find();
+        if(!empty($open_id)){
+            $ret['uname'] = $open_id['uname'];
+            $ret['unex'] = $open_id['unex'];
+            $ret['avatarUrl'] = $open_id['avatarUrl'];
+            $ret['address'] = $open_id['address'];
+            api_success($ret);
+        }else{
+           Db::table('user')->insert($save);
+        }
+        $ret['uname'] = $save['uname'];
+        $ret['unex'] = $save['unex'];
+        $ret['avatarUrl'] = $save['avatarUrl'];
+        $ret['address'] = $save['address'];
         //返回用户信息
-        return json($save);
+        api_success($ret);
 
     }
 
