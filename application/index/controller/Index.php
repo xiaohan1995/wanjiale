@@ -33,7 +33,6 @@ class Index
         // step1
         // 通过 code 用 curl 向腾讯服务器发送请求获取 session_key
         $session_key = $this->sendCode($appid, $appsecret, $code);
-        print_r($session_key);die;
         // step2
         // 用过 session_key 用 sdk 获得用户信息
         $save = [];
@@ -102,6 +101,7 @@ class Index
     {
         //进行解密
         $pc         = new WXBizDataCrypt($APPID, $session_key);
+        print_r($pc);die;
         $decodeData = "";
         $errCode    = $pc->decryptData($encryptedData, $iv, $decodeData);
         //判断解密是否成功
