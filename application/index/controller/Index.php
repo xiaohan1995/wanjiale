@@ -63,7 +63,7 @@ class Index
         $msg = "获取成功";
 
         //返回用户信息
-        return $this->ApiSuccess($save, $msg);
+        return json($save);
 
     }
 
