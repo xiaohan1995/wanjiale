@@ -60,7 +60,7 @@ class Index extends Controller
         $save['avatarUrl'] = &$userinfo['avatarUrl'];
         $save['last_login_time']      = time();
         $map['openid']     = &$userinfo['openId'];
-
+        print_r($save);die;
         $msg = "获取成功";
         $open_id = Db::table('user')->where('openid='.'"'$save['openid'].'"')->find();
         if(!empty($open_id)){
