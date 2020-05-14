@@ -1,6 +1,5 @@
 <?php
 namespace app\index\controller;
-namespace wechatsdk;
 use think\Db;
 use wxBizDataCrypt;
 
