@@ -62,7 +62,7 @@ class Index extends Controller
         $map['openid']     = &$userinfo['openId'];
 
         $msg = "获取成功";
-        $open_id = Db::table('user')->where('openid,'.'"'$save['openid'].'"')->find();
+        $open_id = Db::table('user')->where('openid='.'"'$save['openid'].'"')->find();
         if(!empty($open_id)){
             $ret['uname'] = $open_id['uname'];
             $ret['unex'] = $open_id['unex'];
