@@ -37,3 +37,29 @@ function api_success($data='',$msg='success'){
      );
     exit(json_encode($ret));
  }
+
+ /*
+ **
+  token加密方法
+ */
+  function incode_token($str,$key='wanjiale'){
+     $info = $key.$str;
+     $token = base64_encode($info);
+     return $token;
+  }
+
+  /*
+ **
+  token解密方法
+ */
+  function outcode_token($str,$key='wanjiale'){
+     $info = base64_decode($str);
+     $data = substr($info, 8);
+     return $data;
+  }
+
+
+
+
+
+
