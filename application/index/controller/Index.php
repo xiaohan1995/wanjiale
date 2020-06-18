@@ -63,7 +63,10 @@ class Index extends Controller
         $msg = "获取成功";
         $open_id = Db::table('user')->where('openid',$save['openid'])->find();
         if(!empty($open_id)){
-            $ret['token'] = incode_token($save['openid']);
+            $uid = $open_id['id'];
+            $ret['uid'] = $uid;
+            $ret['token'] = incode_token($save['openid'],$uid);
+            $ret['dada'] = outcode_token($ret['token']);
             $ret['uname'] = $open_id['uname'];
             $ret['unex'] = $open_id['unex'];
             $ret['avatarUrl'] = $open_id['avatarUrl'];
@@ -71,14 +74,16 @@ class Index extends Controller
             api_success($ret);
         }else{
            Db::table('user')->insert($save);
+           $uid = Db::table("user")->getLastInsID();
+           $ret['token'] = incode_token($save['openid'],$uid);
+            $ret['uname'] = $save['uname'];
+            $ret['unex'] = $save['unex'];
+            $ret['avatarUrl'] = $save['avatarUrl'];
+            $ret['address'] = $save['address'];
+            //返回用户信息
+            api_success($ret);
         }
-        $ret['token'] = incode_token($save['openid']);
-        $ret['uname'] = $save['uname'];
-        $ret['unex'] = $save['unex'];
-        $ret['avatarUrl'] = $save['avatarUrl'];
-        $ret['address'] = $save['address'];
-        //返回用户信息
-        api_success($ret);
+        
 
     }
 

@@ -42,8 +42,8 @@ function api_success($data='',$msg='success'){
  **
   token加密方法
  */
-  function incode_token($str,$key='wanjiale'){
-     $info = $key.$str;
+  function incode_token($str,$uid,$key='wanjiale'){
+     $info = $uid.$key.$str;
      $token = base64_encode($info);
      return $token;
   }
@@ -54,7 +54,9 @@ function api_success($data='',$msg='success'){
  */
   function outcode_token($str,$key='wanjiale'){
      $info = base64_decode($str);
-     $data = substr($info, 8);
+     $arr = explode('wanjiale', $info);
+     $data['uid'] = $arr[0];
+     $data['open_id'] = $arr[1];
      return $data;
   }
 
