@@ -14,8 +14,8 @@ class Index extends Controller
     }
 
     public function ceshi(){
-        
-    	$data = Db::table('user')->where('id',1)->find();
+        $data = $_SERVER;
+    	//$data = Db::table('user')->where('id',1)->find();
     	return json($data);
     }
 
@@ -126,6 +126,41 @@ class Index extends Controller
         //返回解密数据
         return json_decode($decodeData, true);
     }
+
+    /**
+    *
+    后台管理登录
+    *
+    **/
+    public function login_admin(){
+       $account = input('post.account');
+       $apass = input('post.apass');
+       if(empty($account)||empty($apass)){
+          api_error('账号或密码为空') ;
+       }
+       $admin = Db::table('admin')->where('account',$account)->find();
+       if(empty($admin)){
+          api_error('该用户不存在');
+       }elseif($apass!=$admin['apass']){
+          api_error('密码错误');
+       }else{
+          api_success($admin['uname']);
+       }
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
