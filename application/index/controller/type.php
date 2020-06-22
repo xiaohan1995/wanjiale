@@ -17,6 +17,10 @@ class Type extends Controller
         }
     }
 
+    public function getgoods(){
+    	
+    }
+
     
     
     
