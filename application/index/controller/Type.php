@@ -41,6 +41,19 @@ class Type extends Controller
         }
     }
 
+    public function indexgoods(){
+        $input = input();
+        $data = Db::table('yx_goods')
+                ->where('g_status=1')
+                ->order('g_add_time desc')
+                ->select();
+        if(!empty($data)){
+            api_success($data);
+        }else{
+            api_success();
+        }
+    }
+
     
     
     
