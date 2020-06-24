@@ -29,6 +29,18 @@ class Type extends Controller
         }
     }
 
+    public function getgoodinfo(){
+        $input = input();
+        $data = Db::table('yx_goods')
+                ->where('g_id='.$input['g_id'].' and g_status=1')
+                ->select();
+        if(!empty($data)){
+            api_success($data);
+        }else{
+            api_success();
+        }
+    }
+
     
     
     
