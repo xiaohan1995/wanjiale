@@ -33,7 +33,7 @@ class Type extends Controller
         $input = input();
         $data = Db::table('yx_goods')
                 ->where('g_id='.$input['g_id'].' and g_status=1')
-                ->select();
+                ->find();
         if(!empty($data)){
             api_success($data);
         }else{
